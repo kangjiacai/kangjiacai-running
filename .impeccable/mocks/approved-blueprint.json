@@ -1,0 +1,8 @@
+{
+  "title": "蓝图配速簿",
+  "approved": true,
+  "approvedBy": "delegated-design-choice",
+  "image": ".impeccable/mocks/approved-blueprint.png",
+  "promptFile": ".impeccable/mocks/approved-blueprint.prompt.txt",
+  "decision": "Selected from three same-world variants because it exposes the current week's actionable checklist and notes in the first viewport while preserving the distinctive survey-blueprint identity."
+}

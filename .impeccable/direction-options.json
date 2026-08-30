@@ -1,0 +1,119 @@
+{
+  "title": "选择 430 训练台的视觉世界",
+  "question": "我会默认继续推进「蓝图配速簿」；你也可以直接选择另一套世界，或重新发牌。",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "蓝图配速簿",
+      "kicker": "THE ROLL",
+      "lineage": "跑道测绘簿 × 蓝晒工程图",
+      "thesis": "把十周训练画成一份可逐项核销的个人耐力测绘档案。",
+      "palette": ["#0647D9", "#F2F4EF", "#C8FF1A", "#111318"],
+      "materials": ["蓝晒纸", "半透明描图膜", "测量铅笔线"],
+      "viewport": "整屏钴蓝测绘底图，巨大的4:30压住左侧，右侧是本周任务和可直接勾选的训练坐标。",
+      "risk": "信息密度如果失控，会像工程软件而不像个人训练台。",
+      "raised": [
+        {"from": "剖面图谱", "raise": "每一条训练数据都有精确标注，不让装饰吞掉任务。"},
+        {"from": "折纸序列", "raise": "完成痕迹永久留在同一条十周路径上。"},
+        {"from": "字母风暴", "raise": "目标数字成为可读的空间骨架，而不是角落里的KPI。"}
+      ],
+      "comp": ".impeccable/mocks/decision/assigned.png"
+    },
+    {
+      "id": "model-pick",
+      "label": "马拉松路书",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "耐力拉力赛路书 × 时间控制卡",
+      "thesis": "每周是一段赛程，每次训练是必须经过的时间控制点。",
+      "palette": ["#F4E800", "#10110F", "#F7F5EC", "#EA3C2F"],
+      "materials": ["防水路书纸", "油性记号", "铝制夹板"],
+      "viewport": "亮黄色路书占据首屏，训练路线以粗黑箭头和时间格推进，周日长跑成为最大控制点。",
+      "risk": "这是最直接的耐力隐喻，也最容易被做成汽车赛事造型。",
+      "comp": ".impeccable/mocks/decision/model-pick.png"
+    },
+    {
+      "id": "challenger-ticket",
+      "label": "终点登机牌",
+      "verdict": "competitive",
+      "lineage": "喷气时代航空票夹",
+      "thesis": "十周是一册只通往11月8日终点线的联程票。",
+      "palette": ["#0A2C61", "#F8F8F2", "#D8302F", "#5B3A82"],
+      "materials": ["票券纸", "复写紫墨", "撕线与验讫章"],
+      "viewport": "一册展开的训练票夹，当前周在最上层；完成任务盖章但不消失，剩余里程沿航线弧线缩短。",
+      "case": "顺序、核销与终点旅程都非常清楚；跑步身份感略弱于测绘簿。",
+      "risk": "如果票券细节过多，备注输入会被压成附属栏。",
+      "comp": ".impeccable/mocks/decision/challenger-ticket.png",
+      "hero": "https://impeccable.style/worlds/cards/vernacular-ephemera-jet-age-ticket-wallet-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/vernacular-ephemera-jet-age-ticket-wallet.webp"
+    },
+    {
+      "id": "challenger-cutaway",
+      "label": "训练剖面图",
+      "verdict": "declined",
+      "lineage": "Busytown剖面图谱",
+      "thesis": "把训练周剖开，让恢复、质量、长跑和补给同时可见。",
+      "palette": ["#E24A38", "#F4C542", "#4B7F52", "#F7F1E5"],
+      "materials": ["平涂水粉", "细棕描边"],
+      "viewport": "一个连续训练城镇，每栋建筑代表一类训练。",
+      "case": "任务清晰但成人高端感不足。",
+      "kept": "所有训练对象都必须带精确小标签。",
+      "risk": "容易变成儿童插画。",
+      "hero": "https://impeccable.style/worlds/cards/graphic-worlds-publishing-busytown-cross-section-hero.webp"
+    },
+    {
+      "id": "challenger-origami",
+      "label": "十周折痕",
+      "verdict": "declined",
+      "lineage": "折纸鹤三十二步序列",
+      "thesis": "每一次打勾都在同一张训练纸上留下不可抹去的折痕。",
+      "palette": ["#D93A2F", "#F7F2E8", "#161514", "#D7B43B"],
+      "materials": ["和纸纤维", "折痕", "墨记"],
+      "viewport": "十周路径在一张连续纸面上逐步成形。",
+      "case": "进度隐喻优美，但日常操作需要额外解释。",
+      "kept": "所有完成状态保留在一条连续路径中。",
+      "risk": "会让训练任务退居视觉叙事之后。",
+      "hero": "https://impeccable.style/worlds/cards/paper-folds-pleats-deployable-orizuru-crane-sequence-hero.webp"
+    },
+    {
+      "id": "challenger-nixie",
+      "label": "辉光计时台",
+      "verdict": "declined",
+      "lineage": "辉光管实验室计数器",
+      "thesis": "剩余天数、周跑量与目标时间像真实仪器一样逐位点亮。",
+      "palette": ["#0A0A08", "#F26A21", "#6B7277", "#F2E8D8"],
+      "materials": ["玻璃管", "黑化钢", "阳极网"],
+      "viewport": "目标数字是仪器面板，任务按机械状态切换。",
+      "case": "指标表现强，但十周计划和备注不够自然。",
+      "kept": "数值变化要有物理感，而不是普通进度条。",
+      "risk": "容易落入黑底霓虹健身页面。",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-nixie-laboratory-counter-hero.webp"
+    },
+    {
+      "id": "challenger-void",
+      "label": "深夜训练队列",
+      "verdict": "declined",
+      "lineage": "Cracktro滚动任务屏",
+      "thesis": "训练状态只通过亮度、深度与漂移速率排序。",
+      "palette": ["#050505", "#EDE9DD", "#F5A623", "#6E7377"],
+      "materials": ["发光黑", "位图字", "灰尘粒子"],
+      "viewport": "所有训练骑在连续基线上，没有卡片和围框。",
+      "case": "状态层级有力，但长中文内容和备注可读性下降。",
+      "kept": "当前任务必须在层级上绝对领先。",
+      "risk": "过于夜间和复古，偏离个人赛季档案。",
+      "hero": "https://impeccable.style/worlds/cards/operate-c-cracktro-scroller-queue-hero.webp"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "comp", "toggle": true},
+  "canon": true,
+  "canonCard": {
+    "label": "标准跑步仪表盘",
+    "thesis": "深色KPI卡、进度环和训练日历，按行业标准做到完整。",
+    "palette": ["#111827", "#F9FAFB", "#22C55E", "#374151"],
+    "materials": ["深色面板", "圆角指标卡", "折线图"],
+    "viewport": "顶部目标与倒计时，下面是训练卡片和周进度。",
+    "risk": "功能熟悉，但很难成为只属于这次合马的页面。",
+    "comp": ".impeccable/mocks/decision/canon.png"
+  },
+  "steer": true
+}
