@@ -42,6 +42,6 @@ jobs:
         run: >-
           npx edgeone@latest makers deploy
           ./dist/marathon-430-edgeone.zip
-          -n hefei-marathon-430
+          -n hefei-marathon-430-auto
           -t "$EDGEONE_API_TOKEN"
           -e production
