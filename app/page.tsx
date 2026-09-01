@@ -118,7 +118,12 @@ const WEEKS: Week[] = [
   },
 ];
 
-const STORAGE_KEY = 'hefei-430-plan:v1';
+const CODED_COMPLETED: Record<string, boolean> = {
+  'w1-mon': true,
+};
+const CODED_NOTES: Record<string, string> = {
+  W01: '前一周周末没有跑步，所以本次还是按 10km 跑的；配速 6分06秒/km，体感舒服。',
+};
 const RACE_TIME = new Date('2026-11-08T07:30:00+08:00').getTime();
 const daysUntilRace = () => Math.max(0, Math.ceil((RACE_TIME - Date.now()) / 86_400_000));
 const WEEK_STARTS = ['2026-08-31', '2026-09-07', '2026-09-14', '2026-09-21', '2026-09-28', '2026-10-05', '2026-10-12', '2026-10-19', '2026-10-26', '2026-11-02'].map((date) => new Date(`${date}T00:00:00+08:00`).getTime());
@@ -145,42 +150,13 @@ const FUELING = [
 export default function Home() {
   const actualWeek = currentWeekIndex();
   const [selectedWeek, setSelectedWeek] = useState(actualWeek);
-  const [completed, setCompleted] = useState<Record<string, boolean>>({});
-  const [notes, setNotes] = useState<Record<string, string>>({});
-  const [ready, setReady] = useState(false);
-  const [saveState, setSaveState] = useState<'loading' | 'saving' | 'saved' | 'error'>('loading');
-  const [savedAt, setSavedAt] = useState('');
   const [countdown, setCountdown] = useState(0);
+  const completed = CODED_COMPLETED;
+  const notes = CODED_NOTES;
 
   useEffect(() => {
     setCountdown(daysUntilRace());
-    try {
-      const saved = window.localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved) as { completed?: Record<string, boolean>; notes?: Record<string, string> };
-        setCompleted(parsed.completed ?? {});
-        setNotes(parsed.notes ?? {});
-      }
-    } catch {
-      // A damaged local value should never block the training plan.
-    }
-    setReady(true);
   }, []);
-
-  useEffect(() => {
-    if (!ready) return;
-    setSaveState('saving');
-    const timer = window.setTimeout(() => {
-      try {
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ completed, notes }));
-        setSavedAt(new Intl.DateTimeFormat('zh-CN', { hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date()));
-        setSaveState('saved');
-      } catch {
-        setSaveState('error');
-      }
-    }, 250);
-    return () => window.clearTimeout(timer);
-  }, [completed, notes, ready]);
 
   const week = WEEKS[selectedWeek];
   const completedCount = useMemo(
@@ -193,7 +169,6 @@ export default function Home() {
   );
   const totalSessions = WEEKS.reduce((sum, item) => sum + item.sessions.length, 0);
   const nextSession = week.sessions.find((session) => !completed[session.id]);
-  const saveLabel = saveState === 'loading' ? '读取中' : saveState === 'saving' ? '保存中' : saveState === 'error' ? '保存失败' : `已保存 ${savedAt}`;
 
   return (
     <main className="page">
@@ -247,7 +222,7 @@ export default function Home() {
             <div className="session-list">
               {week.sessions.map((session) => (
                 <label className="session-row" key={session.id}>
-                  <Checkbox checked={Boolean(completed[session.id])} onCheckedChange={(value) => setCompleted((current) => ({ ...current, [session.id]: value === true }))} className="session-check" />
+                  <Checkbox checked={Boolean(completed[session.id])} disabled className="session-check" />
                   <span className="session-date"><b>{session.day}</b><small>{session.date} / {session.time}</small></span>
                   <span className="session-kind">{session.kind}</span>
                   <span className="session-main"><b>{session.title}</b><small>{session.detail}</small></span>
@@ -262,11 +237,11 @@ export default function Home() {
       </section>
 
       <aside className="field-notes" aria-labelledby="notes-title">
-        <div className="notes-meta"><Clock3 aria-hidden="true" /><span>LOCAL SAVE</span><b className={saveState === 'error' ? 'save-error' : ''} aria-live="polite">{saveLabel}</b></div>
+        <div className="notes-meta"><Clock3 aria-hidden="true" /><span>CODED NOTE</span><b aria-live="polite">计划记录</b></div>
         <h2 id="notes-title">本周手记</h2>
-        <p>记下身体感受、天气、疼痛或补给反应。文字只保存在这台设备。</p>
-        <Textarea value={notes[week.id] ?? ''} onChange={(event) => setNotes((current) => ({ ...current, [week.id]: event.target.value }))} placeholder="例：周日 12 km 后右侧小腿偏紧；第 2 支胶配水后胃部状态稳定……" aria-label={`${week.id} 训练备注`} className="notes-area" />
-        <div className="notes-footer"><span>AUTOSAVE / LOCAL</span><span>{(notes[week.id] ?? '').length} CHAR</span></div>
+        <p>训练记录由计划代码固定，后续根据你的反馈更新发布。</p>
+        <Textarea value={notes[week.id] ?? ''} readOnly aria-label={`${week.id} 训练备注`} className="notes-area" />
+        <div className="notes-footer"><span>STATIC / CODE</span><span>{(notes[week.id] ?? '').length} CHAR</span></div>
         <blockquote>“稳住前半程，30 km 后才开始比赛。”</blockquote>
       </aside>
       </div>
@@ -289,7 +264,7 @@ export default function Home() {
             const done = item.sessions.filter((session) => completed[session.id]).length;
             return (
               <article className="ledger-week" key={item.id}>
-                <button type="button" className="ledger-week-head" onClick={() => { setSelectedWeek(weekIndex); window.scrollTo({ top: 0, behavior: 'smooth' }); }} aria-label={`在顶部查看 ${item.id} 并编辑备注`}>
+                <button type="button" className="ledger-week-head" onClick={() => { setSelectedWeek(weekIndex); window.scrollTo({ top: 0, behavior: 'smooth' }); }} aria-label={`在顶部查看 ${item.id} 与计划记录`}>
                   <span className="ledger-week-id">{item.id}</span>
                   <span><b>{item.phase}</b><small>{item.range}</small></span>
                   <span className="ledger-total">{item.total}</span>
@@ -298,7 +273,7 @@ export default function Home() {
                 <div className="ledger-session-grid">
                   {item.sessions.map((session) => (
                     <label className="ledger-session" key={session.id}>
-                      <Checkbox checked={Boolean(completed[session.id])} onCheckedChange={(value) => setCompleted((current) => ({ ...current, [session.id]: value === true }))} className="ledger-check" />
+                      <Checkbox checked={Boolean(completed[session.id])} disabled className="ledger-check" />
                       <span><b>{session.day} · {session.kind}</b><small>{session.title}</small></span>
                       <strong>{session.distance}</strong>
                     </label>
