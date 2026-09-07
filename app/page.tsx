@@ -120,6 +120,9 @@ const WEEKS: Week[] = [
 
 const CODED_COMPLETED: Record<string, boolean> = {
   'w1-mon': true,
+  'w1-thu': true,
+  'w1-sat': true,
+  'w1-sun': true,
 };
 const CODED_NOTES: Record<string, string> = {
   W01: '前一周周末没有跑步，所以本次还是按 10km 跑的；配速 6分06秒/km，体感舒服。',
