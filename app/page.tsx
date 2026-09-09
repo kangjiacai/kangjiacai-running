@@ -354,7 +354,10 @@ export default function Home() {
       <footer className="plan-footer">
         <span>430 / HEFEI</span>
         <p>计划是路线，不是债务。生病、尖锐疼痛或动作变形时，删掉一课比补回一课更接近终点。</p>
-        <a href="#top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>返回起点 ↑</a>
+        <div className="plan-footer-actions">
+          <a className="icp-link" href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">皖ICP备2026029973号-1</a>
+          <a className="back-to-top" href="#top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>返回起点 ↑</a>
+        </div>
       </footer>
     </main>
   );
